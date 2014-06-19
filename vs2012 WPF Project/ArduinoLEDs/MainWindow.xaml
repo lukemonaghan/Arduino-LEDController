@@ -1,23 +1,31 @@
 ﻿<Window x:Class="ArduinoLEDs.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Arduino LED Controller" Height="356" Width="512" MinWidth="512" MaxWidth="512" MaxHeight="356" MinHeight="356" Background="Black" Foreground="White" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Arduino LED Controller" Height="397" MaxHeight="397" MinHeight="397"  Width="512" MinWidth="512" MaxWidth="512" Background="Black" Foreground="White" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Slider Minimum="0" Maximum="255" Name="RedSlider" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="228" PreviewMouseLeftButtonUp="RedSlider_PreviewMouseLeftButtonUp" Foreground="White"/>
-        <Slider Minimum="0" Maximum="255" Name="GreenSlider" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="228"  PreviewMouseLeftButtonUp="GreenSlider_PreviewMouseLeftButtonUp" Foreground="White"/>
-        <Slider Minimum="0" Maximum="255" Name="BlueSlider" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="228"  PreviewMouseLeftButtonUp="BlueSlider_PreviewMouseLeftButtonUp" Foreground="White"/>
+        <Slider Minimum="0" Maximum="255" Name="RedSlider" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="114" PreviewMouseLeftButtonUp="RedSlider_PreviewMouseLeftButtonUp" />
+        <Slider Minimum="0" Maximum="255" Name="GreenSlider" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="114"  PreviewMouseLeftButtonUp="GreenSlider_PreviewMouseLeftButtonUp" />
+        <Slider Minimum="0" Maximum="255" Name="BlueSlider" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="114"  PreviewMouseLeftButtonUp="BlueSlider_PreviewMouseLeftButtonUp"/>
         <Label Content="Red" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="Red"/>
         <Label Content="Blue" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,126,0,0" RenderTransformOrigin="0.424,-0.115" Foreground="Blue" FontWeight="Bold"/>
         <Label Content="Green" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.842,2.615" Margin="10,68,0,0" Foreground="Lime" FontWeight="Bold"/>
-        <Button Name="btnOff" Content="Off" HorizontalAlignment="Left" Margin="266,72,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnOff_PreviewMouseLeftButtonDown"/>
-        <Button Name="btnWhite" Content="White" HorizontalAlignment="Left" Margin="389,72,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnWhite_PreviewMouseLeftButtonDown" />
-        <Button Name="btnScroll" Content="Scroll" HorizontalAlignment="Left" Margin="266,99,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnScroll_PreviewMouseLeftButtonDown"/>
-        <Button Name="btnStrobe" Content="Strobe" HorizontalAlignment="Left" Margin="389,99,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnStrobe_PreviewMouseLeftButtonDown"/>
+        <Button Name="btnOff" Content="Off" HorizontalAlignment="Left" Margin="266,126,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnOff_PreviewMouseLeftButtonDown"/>
+        <Button Name="btnWhite" Content="White" HorizontalAlignment="Left" Margin="266,99,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnWhite_PreviewMouseLeftButtonDown" />
+        <Button Name="btnScroll" Content="Scroll" HorizontalAlignment="Left" Margin="266,72,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnScroll_PreviewMouseLeftButtonDown"/>
+        <Button Name="btnStrobe" Content="Strobe" HorizontalAlignment="Left" Margin="389,72,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnStrobe_PreviewMouseLeftButtonDown"/>
         <Slider Name="sldSpeed" Minimum="1" Maximum="100" HorizontalAlignment="Left" Margin="266,41,0,0" VerticalAlignment="Top" Width="228" PreviewMouseLeftButtonUp="sldSpeed_PreviewMouseLeftButtonUp"/>
         <Label Content="Speed" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
-        <TextBox Name="tbSpecial" HorizontalAlignment="Left" Height="23" Margin="266,156,0,0" TextWrapping="Wrap" Text="r2r2g2g2b2b2w2o0" VerticalAlignment="Top" Width="228" PreviewKeyUp="tbSpecial_PreviewKeyUp" FontWeight="Bold" MaxLines="1" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="Custom Command" HorizontalAlignment="Left" Margin="266,126,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
-        <TextBlock Name="tbTextInfo" HorizontalAlignment="Left" Margin="10,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="132" Width="484"/>
+        <TextBox Name="tbSpecial" HorizontalAlignment="Left" Height="23" Margin="10,188,0,0" TextWrapping="Wrap" Text="rG2Gr2gB2Bg2bR2Rb2wW2Oo0" VerticalAlignment="Top" Width="486" PreviewKeyUp="tbSpecial_PreviewKeyUp" FontWeight="Bold" MaxLines="1" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="Custom Command" HorizontalAlignment="Left" Margin="382,157,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
+        <TextBlock Name="tbTextInfo" HorizontalAlignment="Left" Margin="10,227,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="132" Width="484"/>
+        <Slider Minimum="0" Maximum="255" x:Name="RedSliderL" HorizontalAlignment="Left" Margin="129,41,0,0" VerticalAlignment="Top" Width="114" PreviewMouseLeftButtonUp="RedSliderL_PreviewMouseLeftButtonUp" />
+        <Slider Minimum="0" Maximum="255" x:Name="GreenSliderL" HorizontalAlignment="Left" Margin="129,99,0,0" VerticalAlignment="Top" Width="114"  PreviewMouseLeftButtonUp="GreenSliderL_PreviewMouseLeftButtonUp" />
+        <Slider Minimum="0" Maximum="255" x:Name="BlueSliderL" HorizontalAlignment="Left" Margin="129,157,0,0" VerticalAlignment="Top" Width="114"  PreviewMouseLeftButtonUp="BlueSliderL_PreviewMouseLeftButtonUp"/>
+        <Label Content="Red" HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label Content="Blue" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,126,0,0" RenderTransformOrigin="0.424,-0.115" Foreground="Blue" FontWeight="Bold"/>
+        <Label Content="Green" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.842,2.615" Margin="129,68,0,0" Foreground="Lime" FontWeight="Bold"/>
+        <Button x:Name="btnWhiteL" Content="White" HorizontalAlignment="Left" Margin="389,99,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnWhiteL_PreviewMouseLeftButtonDown" />
+        <Button x:Name="btnOffL" Content="Off" HorizontalAlignment="Left" Margin="389,126,0,0" VerticalAlignment="Top" Width="105" PreviewMouseLeftButtonDown="btnOffL_PreviewMouseLeftButtonDown"/>
 
     </Grid>
 </Window>

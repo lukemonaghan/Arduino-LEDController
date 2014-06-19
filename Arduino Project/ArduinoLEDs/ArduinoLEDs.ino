@@ -6,13 +6,13 @@
 // Pinouts
 // 6,5,3 are LEDs
 // 8 is GND
-byte Pins[4] = {6,5,3,8};
+byte Pins[7] = {6,5,3,7,11,10,9};
 
 // Speed
 short SPEED = 10;
 
 // LED Colours
-short col[3] = {0,0,0};
+short col[6] = {0,0,0,0,0,0};
 
 // Custom Command Buffer
 char CommandLoop[128];
@@ -33,19 +33,22 @@ void setup() {
 	pinMode(Pins[1], OUTPUT);
 	pinMode(Pins[2], OUTPUT);
 	pinMode(Pins[3], OUTPUT);
+	pinMode(Pins[4], OUTPUT);
+	pinMode(Pins[5], OUTPUT);
+	pinMode(Pins[6], OUTPUT);
 	
 	//Serial
-	Serial.begin(9600);
+	Serial.begin(19200);
 
 	// boot Sequence
-	SpecialCommand("r2r2g2g2b2b2w2o0");
+	SpecialCommand("rB4BrgR4RgbG4Gb4Wo4Ow4o");
 
 	// Now scroll
 	com = 2;
 }
 
 void SpecialCommand(char _Command[]){
-	bool leds[3] = {0,0,0};
+	bool leds[6] = {0,0,0,0,0,0};
 
 	for (byte b = 0; b <= strlen(_Command); b++){
 		// check if we have a new command, if we do, exit out
@@ -63,16 +66,37 @@ void SpecialCommand(char _Command[]){
 			}
 		}
 		// RGB W and O
-		if (_Command[b] == 'r' || _Command[b] == 'R'){leds[0] = !leds[0];}
-		if (_Command[b] == 'g' || _Command[b] == 'G'){leds[1] = !leds[1];}
-		if (_Command[b] == 'b' || _Command[b] == 'B'){leds[2] = !leds[2];}
-		if (_Command[b] == 'w' || _Command[b] == 'W'){leds[0] = leds[1] = leds[2] = true;}
-		if (_Command[b] == 'o' || _Command[b] == 'O'){leds[0] = leds[1] = leds[2] = false;}
+		if (_Command[b] == 'r'){leds[0] = !leds[0];}
+		if (_Command[b] == 'g'){leds[1] = !leds[1];}
+		if (_Command[b] == 'b'){leds[2] = !leds[2];}
+
+		if (_Command[b] == 'R'){leds[3] = !leds[3];}
+		if (_Command[b] == 'G'){leds[4] = !leds[4];}
+		if (_Command[b] == 'B'){leds[5] = !leds[5];}
+
+		if (_Command[b] == 'w'){leds[0] = leds[1] = leds[2] = true;}
+		if (_Command[b] == 'o'){leds[0] = leds[1] = leds[2] = false;}
+
+		if (_Command[b] == 'W'){leds[3] = leds[4] = leds[5] = true;}
+		if (_Command[b] == 'O'){leds[3] = leds[4] = leds[5] = false;}
 
 		// Write to LED's
-		analogWrite(Pins[0], (leds[0] == 1) ? 255 : 0);
-		analogWrite(Pins[1], (leds[1] == 1) ? 255 : 0);
-		analogWrite(Pins[2], (leds[2] == 1) ? 255 : 0);
+		col[0] = (leds[0] == 1) ? 255 : 0;
+		col[1] = (leds[1] == 1) ? 255 : 0;
+		col[2] = (leds[2] == 1) ? 255 : 0;
+
+		col[3] = (leds[3] == 1) ? 255 : 0;
+		col[4] = (leds[4] == 1) ? 255 : 0;
+		col[5] = (leds[5] == 1) ? 255 : 0;
+
+		analogWrite(Pins[0], (byte)col[0]);
+		analogWrite(Pins[1], (byte)col[1]);
+		analogWrite(Pins[2], (byte)col[2]);	
+
+		analogWrite(Pins[4], (byte)col[3]);
+		analogWrite(Pins[5], (byte)col[4]);
+		analogWrite(Pins[6], (byte)col[5]);
+		SendData();
 	}
 }
 
@@ -85,6 +109,14 @@ void strobe(){
 	analogWrite(Pins[0], (byte)col[0]);
 	analogWrite(Pins[1], (byte)col[1]);
 	analogWrite(Pins[2], (byte)col[2]);
+
+	col[3] += random(-2, 2); if (col[3] < 0){col[3] = 0;}else if (col[3] > 255){col[3] = 255;}
+	col[4] += random(-2, 2); if (col[4] < 0){col[4] = 0;}else if (col[4] > 255){col[4] = 255;}
+	col[5] += random(-2, 2); if (col[5] < 0){col[5] = 0;}else if (col[5] > 255){col[5] = 255;}
+	analogWrite(Pins[4], (byte)col[3]);
+	analogWrite(Pins[5], (byte)col[4]);
+	analogWrite(Pins[6], (byte)col[5]);
+	SendData();
 }
 
 // Scrolling RGB leds
@@ -114,10 +146,17 @@ void scroll(){
 		if (col[0] <= 0){ col[0] = 0; }
 		if (col[1] >= 254){ col[1] = 255; selected = 0; }
  	}
-
 	analogWrite(Pins[0], (byte)col[0]);
 	analogWrite(Pins[1], (byte)col[1]);
 	analogWrite(Pins[2], (byte)col[2]);
+
+ 	col[3] = col[0];
+ 	col[4] = col[1];
+ 	col[5] = col[2];
+	analogWrite(Pins[4], (byte)col[3]);
+	analogWrite(Pins[5], (byte)col[4]);
+	analogWrite(Pins[6], (byte)col[5]);
+	SendData();
 }
 
 // Commands
@@ -160,6 +199,33 @@ void Commands(){
 		}
 	}
 
+	if (buffer[0] == 'R' || buffer[0] == 'G' || buffer[0] == 'B'){
+		com = 0;
+		char key = buffer[0];
+		for (byte b = 0; b < index; b++){
+			buffer[b] = buffer[b + 1];
+		}
+
+		int val = atoi(buffer);
+		val = (val < 0) ? 0 : (val > 255) ? 255 : val;
+
+		switch(key){
+			case 'R':
+			analogWrite(Pins[4], (byte)val);
+			col[3] = (byte)val;
+			break;
+			case 'G':
+			analogWrite(Pins[5], (byte)val);
+			col[4] = (byte)val;
+			break;
+			case 'B':
+			analogWrite(Pins[6], (byte)val);
+			col[5] = (byte)val;
+			break;
+		}
+	}
+
+
 	if (buffer[0] == 't'){
 		if (com == 3) {com = 2;}
 		for (byte b = 0; b < index; b++){
@@ -178,12 +244,28 @@ void Commands(){
 		col[0] = col[1] = col[2] = 255;
 	}
 
+	if (buffer[0] == 'W'){
+		com = 0;
+		analogWrite(Pins[4], 255);
+		analogWrite(Pins[5], 255);
+		analogWrite(Pins[6], 255);
+		col[3] = col[4] = col[5] = 255;
+	}
+
 	if (buffer[0] == 'o'){
 		com = 0;
 		analogWrite(Pins[0], 0);
 		analogWrite(Pins[1], 0);
 		analogWrite(Pins[2], 0);
 		col[0] = col[1] = col[2] = 0;
+	}
+
+		if (buffer[0] == 'O'){
+		com = 0;
+		analogWrite(Pins[4], 0);
+		analogWrite(Pins[5], 0);
+		analogWrite(Pins[6], 0);
+		col[3] = col[4] = col[5] = 0;
 	}
 
 	if (buffer[0] == 's'){
@@ -202,6 +284,22 @@ void Commands(){
 		}
 		CommandLoop[index + 1] = '\0';
 	}
+	SendData();
+}
+
+void SendData(){
+	String VAL = "R" + String(col[0]);
+	VAL += "G" + String(col[1]);
+	VAL += "B" + String(col[2]);
+
+	VAL += "r" + String(col[3]);
+	VAL += "g" + String(col[4]);
+	VAL += "b" + String(col[5]);
+	VAL += ".";
+
+	char BUFFER[VAL.length()+1];
+	VAL.toCharArray(BUFFER,VAL.length()+1);
+	Serial.write(BUFFER);
 }
 
 // Main Loop
