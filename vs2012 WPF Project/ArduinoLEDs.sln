@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoLEDs", "ArduinoLEDs\ArduinoLEDs.csproj", "{8A2AECCF-A0F1-4509-BA27-1096B3C1E953}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoLEDs", "ArduinoLEDs\ArduinoLEDs.csproj", "{426A09B1-DB2C-4319-8B62-BBDFC7FB8172}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8A2AECCF-A0F1-4509-BA27-1096B3C1E953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A2AECCF-A0F1-4509-BA27-1096B3C1E953}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A2AECCF-A0F1-4509-BA27-1096B3C1E953}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A2AECCF-A0F1-4509-BA27-1096B3C1E953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426A09B1-DB2C-4319-8B62-BBDFC7FB8172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426A09B1-DB2C-4319-8B62-BBDFC7FB8172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426A09B1-DB2C-4319-8B62-BBDFC7FB8172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426A09B1-DB2C-4319-8B62-BBDFC7FB8172}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
